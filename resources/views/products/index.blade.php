@@ -66,6 +66,7 @@ function fetchEntries() {
             <td>${Number(e.total_value).toFixed(2)}</td>
             <td class="text-end">
               <button class="btn btn-sm btn-outline-secondary" onclick="editRow('${e.id}')">Edit</button>
+              <button class="btn btn-sm btn-outline-danger" onclick="deleteRow('${e.id}')">Delete</button>
             </td>
           </tr>
         `);
@@ -108,6 +109,17 @@ function editRow(id) {
       <button class="btn btn-sm btn-primary" onclick="saveRow('${id}')">Save</button>
       <button class="btn btn-sm btn-outline-secondary" onclick="fetchEntries()">Cancel</button>
     </div>`;
+}
+
+function deleteRow(id) {
+  if (!confirm("Are you sure you want to delete this entry?")) return;
+
+  fetch(`/entries/${id}`, {
+    method: 'DELETE',
+    headers: { 'X-CSRF-TOKEN': window.csrf }
+  })
+  .then(r => r.json())
+  .then(() => fetchEntries());
 }
 
 function saveRow(id) {

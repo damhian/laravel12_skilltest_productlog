@@ -20,3 +20,5 @@ a simple web application that allows users to submit, edit and delete product li
 -   **Bootstrap styling**: clean, responsive layout using Twitter Bootstrap 5.
 
 ---
+
+to run just run, just run composer run dev or php artisan serve
