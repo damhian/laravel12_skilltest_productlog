@@ -13,7 +13,7 @@
       <input type="number" name="quantity_in_stock" class="form-control" min="0" required>
     </div>
     <div class="col-md-4">
-      <label class="form-label">Price per item</label>
+      <label class="form-label">Price per item in USD ($)</label>
       <input type="number" step="0.01" name="price_per_item" class="form-control" min="0" required>
     </div>
     <div class="col-12">
@@ -30,14 +30,14 @@
           <th>Quantity</th>
           <th>Price per item in USD ($)</th>
           <th>Datetime submitted</th>
-          <th>Total value</th>
+          <th>Total value in USD ($)</th>
           <th class="text-end">Actions</th>
         </tr>
       </thead>
       <tbody></tbody>
       <tfoot>
         <tr>
-          <th colspan="4" class="text-end">Sum total</th>
+          <th colspan="4" class="text-end">Sum total in USD ($)</th>
           <th id="sum-total">0</th>
           <th></th>
         </tr>
@@ -51,7 +51,7 @@
 // 1) Load entries and render table
 function fetchEntries() {
   fetch('/entries')
-    .then(r => r.json())
+    .then(row => row.json())
     .then(({ entries, sum_total_value }) => {
       const tbody = document.querySelector('#entries-table tbody');
       tbody.innerHTML = '';
@@ -76,7 +76,6 @@ function fetchEntries() {
     });
 }
 
-// 2) Submit form via AJAX
 document.getElementById('entry-form').addEventListener('submit', function (ev) {
   ev.preventDefault();
   const formData = new FormData(ev.target);
@@ -93,7 +92,7 @@ document.getElementById('entry-form').addEventListener('submit', function (ev) {
   });
 });
 
-// 3) Inline edit row
+
 function editRow(id) {
   const tr = document.querySelector(`tr[data-id="${id}"]`);
   const cells = tr.querySelectorAll('td');
@@ -118,7 +117,7 @@ function deleteRow(id) {
     method: 'DELETE',
     headers: { 'X-CSRF-TOKEN': window.csrf }
   })
-  .then(r => r.json())
+  .then(row => row.json())
   .then(() => fetchEntries());
 }
 
@@ -143,7 +142,6 @@ function saveRow(id) {
   .then(() => fetchEntries());
 }
 
-// 4) Initial load
 fetchEntries();
 </script>
 @endsection

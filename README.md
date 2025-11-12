@@ -17,7 +17,9 @@ a simple web application that allows users to submit, edit and delete product li
     -   Shows product name, quantity, price, datetime submitted, and total value.
     -   Calculates sum total of all entries.
 -   **Edit functionality**: each row can be edited inline and saved back to the JSON/XML files.
--   **Bootstrap styling**: clean, responsive layout using Twitter Bootstrap 5.
+-   **Delete functionality**: each row can be deleted inline and saved back to the JSON/XML files.
+-   **Bootstrap styling**: clean, responsive layout using Twitter Bootstrap.
+-   **File Save in JSON and XML** : file save in JSON and xml in /storage/app/private
 
 ---
 

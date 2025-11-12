@@ -68,11 +68,7 @@ class ProductEntryController extends Controller
 
     public function destroy($id){
         $entries = $this->readEntries();
-
-        // Filter out the entry with matching id
         $entries = array_filter($entries, fn($e) => $e['id'] !== $id);
-
-        // Reindex array (array_filter preserves keys)
         $entries = array_values($entries);
 
         $this->writeEntries($entries);
